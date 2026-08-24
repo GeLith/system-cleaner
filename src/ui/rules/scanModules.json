@@ -1,0 +1,71 @@
+{
+  "source": "ExaminPlugin_Trash.ini",
+  "modules": [
+    {
+      "index": 0,
+      "id": 1000,
+      "score": 1,
+      "safeLevel": 2,
+      "name": "娱乐软件垃圾",
+      "desc": "娱乐软件垃圾描述",
+      "engId": 103,
+      "icon": "exam_trash_cache.png",
+      "btnText": "清理"
+    },
+    {
+      "index": 1,
+      "id": 15000,
+      "score": 2,
+      "safeLevel": 2,
+      "name": "常用软件垃圾",
+      "desc": "常用软件垃圾描述",
+      "engId": 104,
+      "icon": "exam_trash_changyongruanjian.png",
+      "btnText": "清理"
+    },
+    {
+      "index": 2,
+      "id": 30000,
+      "score": 2,
+      "safeLevel": 2,
+      "name": "系统垃圾",
+      "desc": "系统垃圾描述",
+      "engId": 101,
+      "icon": "exam_trash_systrash.png",
+      "btnText": "清理"
+    },
+    {
+      "index": 3,
+      "id": 31000,
+      "score": 1,
+      "safeLevel": 2,
+      "name": "Cookies信息",
+      "desc": "Cookies信息描述",
+      "engId": 401,
+      "icon": "exam_trash_cookie.png",
+      "btnText": "清理"
+    },
+    {
+      "index": 4,
+      "id": 41000,
+      "score": 1,
+      "safeLevel": 2,
+      "name": "痕迹信息",
+      "desc": "痕迹信息描述",
+      "engId": 201,
+      "icon": "exam_trash_trace.png",
+      "btnText": "清理"
+    },
+    {
+      "index": 5,
+      "id": 51000,
+      "score": 2,
+      "safeLevel": 2,
+      "name": "注册表",
+      "desc": "注册表描述",
+      "engId": 301,
+      "icon": "exam_trash_reg.png",
+      "btnText": "清理"
+    }
+  ]
+}

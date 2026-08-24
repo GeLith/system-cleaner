@@ -1,0 +1,42 @@
+# ---------- 依赖 ----------
+node_modules/
+
+# ---------- 构建产物 ----------
+src-tauri/target/
+src-tauri/gen/schemas/
+
+# ---------- 安装包与二进制产物 (通过 GitHub Release 分发, 不进仓库) ----------
+*.exe
+*.msi
+*.dmg
+*.AppImage
+*.deb
+*.rpm
+*.zip
+*.tar.gz
+
+# ---------- 日志与临时文件 ----------
+*.log
+logs/
+.tmp/
+.cache/
+tmp/
+
+# ---------- 私密与本地配置 ----------
+.env
+.env.*
+*.key
+*.pem
+
+# ---------- 操作系统 ----------
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ---------- IDE ----------
+.vscode/
+.idea/
+
+# ---------- AI 工具目录 ----------
+.codegraph/
+.omo/

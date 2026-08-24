@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:;">
+  <title>系统清理工具</title>
+  <link rel="stylesheet" href="styles/app.css">
+  <style>
+    /* 启动加载层: 随首帧渲染, 前端就绪后由 api-shim 淡出移除 */
+    #boot-loading {
+      position: fixed; inset: 0; z-index: 9999;
+      background: #F5F7FA;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 18px;
+      font-family: "Microsoft YaHei UI", "Segoe UI", system-ui, sans-serif;
+      color: #64748B; font-size: 14px; letter-spacing: 2px;
+      transition: opacity .28s ease;
+      pointer-events: all;
+    }
+    #boot-loading.hide { opacity: 0; pointer-events: none; }
+    #boot-loading .boot-ring {
+      width: 34px; height: 34px; border-radius: 50%;
+      border: 3px solid rgba(2,132,199,.15);
+      border-top-color: #0284C7;
+      animation: bootSpin .8s linear infinite;
+    }
+    @keyframes bootSpin { to { transform: rotate(360deg); } }
+  </style>
+</head>
+<body>
+  <div id="boot-loading" aria-label="正在加载">
+    <div class="boot-ring"></div>
+    <div>正在加载</div>
+  </div>
+  <a class="skip-link" href="#mainContent">跳到主要内容</a>
+  <svg id="icon-sprite" xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+  <symbol id="icon-app" viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M8 6h8"/><path d="M8 10h8"/><path d="M8 14h4"/></symbol>
+  <symbol id="icon-bars" viewBox="0 0 24 24"><line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/><line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/></symbol>
+  <symbol id="icon-boot" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></symbol>
+  <symbol id="icon-browser" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></symbol>
+  <symbol id="icon-chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></symbol>
+  <symbol id="icon-clean" viewBox="0 0 24 24"><path d="M3 6h18"/><path d="M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/></symbol>
+  <symbol id="icon-close" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></symbol>
+  <symbol id="icon-cookie" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1010 10 4 4 0 01-5-5 4 4 0 01-5-5"/><circle cx="8" cy="10" r="1" fill="currentColor"/><circle cx="14" cy="8" r="1" fill="currentColor"/><circle cx="11" cy="14" r="1" fill="currentColor"/></symbol>
+  <symbol id="icon-disk" viewBox="0 0 24 24"><line x1="22" y1="12" x2="2" y2="12"/><path d="M5.45 5.11L2 12v6a2 2 0 002 2h16a2 2 0 002-2v-6l-3.45-6.89A2 2 0 0016.76 4H7.24a2 2 0 00-1.79 1.11z"/><line x1="6" y1="16" x2="6.01" y2="16"/><line x1="10" y1="16" x2="10.01" y2="16"/></symbol>
+  <symbol id="icon-download" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></symbol>
+  <symbol id="icon-folder" viewBox="0 0 24 24"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/></symbol>
+  <symbol id="icon-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></symbol>
+  <symbol id="icon-layers" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></symbol>
+  <symbol id="icon-network" viewBox="0 0 24 24"><path d="M5 12.55a11 11 0 0114.08 0"/><path d="M1.42 9a16 16 0 0121.16 0"/><path d="M8.53 16.11a6 6 0 016.95 0"/><line x1="12" y1="20" x2="12.01" y2="20"/></symbol>
+  <symbol id="icon-plugin" viewBox="0 0 24 24"><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></symbol>
+  <symbol id="icon-recycle" viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></symbol>
+  <symbol id="icon-registry" viewBox="0 0 24 24"><circle cx="12" cy="6" r="2"/><circle cx="6" cy="18" r="2"/><circle cx="18" cy="18" r="2"/><circle cx="18" cy="12" r="2"/><path d="M12 8v4"/><path d="M12 12l-6 6"/><path d="M12 12l6 6"/></symbol>
+  <symbol id="icon-service" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></symbol>
+  <symbol id="icon-settings" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></symbol>
+  <symbol id="icon-software" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h6"/><path d="M9 13h6"/><path d="M9 17h4"/></symbol>
+  <symbol id="icon-speed" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></symbol>
+  <symbol id="icon-startup" viewBox="0 0 24 24"><path d="M18.36 6.64a9 9 0 11-12.73 0"/><line x1="12" y1="2" x2="12" y2="12"/></symbol>
+  <symbol id="icon-shredder" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/><path d="M12 14c0-2 1.5-3 1.5-5 0 1.5-1.5 2-1.5 3.5S12 14 12 14z"/></symbol>
+  <symbol id="icon-task" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><path d="M8 14h.01"/><path d="M12 14h.01"/><path d="M16 14h.01"/></symbol>
+  <symbol id="icon-temp" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></symbol>
+  <symbol id="icon-trace" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><path d="M12 18v-6"/><path d="M9 15l3 3 3-3"/></symbol>
+  <symbol id="icon-update" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M16 8v5a3 3 0 006 0v-1a10 10 0 10-3.92 7.94"/></symbol>
+  <symbol id="icon-win11" viewBox="0 0 24 24"><rect x="3" y="3" width="8" height="8" rx="1"/><rect x="13" y="3" width="8" height="8" rx="1"/><rect x="3" y="13" width="8" height="8" rx="1"/><rect x="13" y="13" width="8" height="8" rx="1"/></symbol>
+  <symbol id="icon-text" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="13" y2="17"/></symbol>
+  </svg>
+  <!-- Custom Title Bar -->
+  <div id="titlebar" class="titlebar">
+    <div class="titlebar-drag">
+      <span class="titlebar-icon" id="titlebarIcon">
+        <!-- Inline app logo: shield/clean mark -->
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L3 7v5c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-9-5z"/><polyline points="9 12 11 14 15 10"/></svg>
+      </span>
+      <span class="titlebar-title">系统清理工具</span>
+    </div>
+    <div class="titlebar-controls">
+      <button class="titlebar-btn" id="btnMinimize" aria-label="最小化">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="2" y1="6" x2="10" y2="6"/></svg>
+      </button>
+      <button class="titlebar-btn titlebar-btn-close" id="btnClose" aria-label="关闭">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><line x1="2.5" y1="2.5" x2="9.5" y2="9.5"/><line x1="9.5" y1="2.5" x2="2.5" y2="9.5"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <div id="appShell" class="app-shell">
+    <!-- Sidebar -->
+    <nav id="sidebar" class="sidebar expanded">
+      <div class="sidebar-brand">
+        <svg class="sidebar-brand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2L3 7v5c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-9-5z"/><polyline points="9 12 11 14 15 10"/></svg>
+        <span class="sidebar-brand-name">系统清理工具</span>
+      </div>
+      <ul class="sidebar-nav">
+        <li class="sidebar-item active" data-view="welcome">
+          <a href="#" data-view="welcome" data-label="首页">
+            <span class="sidebar-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"/></svg>
+            </span>
+            <span class="sidebar-label">首页</span>
+          </a>
+        </li>
+        <li class="sidebar-item" data-view="speedup">
+          <a href="#" data-view="speedup" data-label="电脑加速">
+            <span class="sidebar-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="m3.75 13.5 10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75Z"/></svg>
+            </span>
+            <span class="sidebar-label">电脑加速</span>
+          </a>
+        </li>
+        <li class="sidebar-item" data-view="clean">
+          <a href="#" data-view="clean" data-label="垃圾清理">
+            <span class="sidebar-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0"/></svg>
+            </span>
+            <span class="sidebar-label">垃圾清理</span>
+          </a>
+        </li>
+        <li class="sidebar-item" data-view="startup">
+          <a href="#" data-view="startup" data-label="启动项管理">
+            <span class="sidebar-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0ZM3.75 12h.007v.008H3.75V12Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm-.375 5.25h.007v.008H3.75v-.008Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"/></svg>
+            </span>
+            <span class="sidebar-label">启动项管理</span>
+          </a>
+        </li>
+        <li class="sidebar-item" data-view="shredder">
+          <a href="#" data-view="shredder" data-label="文件粉碎机">
+            <span class="sidebar-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#icon-shredder"/></svg>
+            </span>
+            <span class="sidebar-label">文件粉碎机</span>
+          </a>
+        </li>
+        <li class="sidebar-item" data-view="settings">
+          <a href="#" data-view="settings" data-label="设置">
+            <span class="sidebar-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#icon-settings"/></svg>
+            </span>
+            <span class="sidebar-label">设置</span>
+          </a>
+        </li>
+      </ul>
+      <button class="sidebar-toggle" id="sidebarToggle" aria-label="收起侧边栏">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-bars"/></svg>
+        <span class="sidebar-toggle-text">收起侧边栏</span>
+      </button>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main id="mainContent" class="main-content">
+      <!-- Welcome Page -->
+      <section id="view-welcome" class="view active">
+        <div class="welcome-container">
+          <div class="welcome-top">
+            <h1 class="welcome-title">欢迎使用系统清理工具</h1>
+            <p class="welcome-subtitle" id="welcomeStats">你好，今天也来给电脑减减负吧～</p>
+          </div>
+
+          <!-- Hero: cumulative stat + primary action -->
+          <div class="welcome-hero">
+            <div class="welcome-hero-stat">
+              <span class="stat-card-value" id="statTotalCleaned">--</span>
+              <span class="stat-card-label">累计清理总量</span>
+            </div>
+            <button class="btn btn-primary welcome-cta guide-item" data-view="clean">
+              <svg class="btn-icon"><use href="#icon-clean"/></svg>
+              <span>开始垃圾清理</span>
+            </button>
+            </div>
+
+            <!-- Quick actions -->
+            <div class="quick-actions">
+            <div class="quick-card guide-item" data-view="clean">
+              <span class="quick-card-icon"><svg><use href="#icon-clean"/></svg></span>
+              <div class="quick-card-body">
+                <div class="quick-card-title">垃圾清理</div>
+                <div class="quick-card-desc">扫描并清理系统垃圾文件</div>
+              </div>
+              <svg class="quick-card-arrow"><use href="#icon-chevron"/></svg>
+            </div>
+            <div class="quick-card guide-item" data-view="speedup">
+              <span class="quick-card-icon"><svg><use href="#icon-speed"/></svg></span>
+              <div class="quick-card-body">
+                <div class="quick-card-title">电脑加速</div>
+                <div class="quick-card-desc">释放内存，提升运行速度</div>
+              </div>
+              <svg class="quick-card-arrow"><use href="#icon-chevron"/></svg>
+            </div>
+            <div class="quick-card guide-item" data-view="startup">
+              <span class="quick-card-icon"><svg><use href="#icon-startup"/></svg></span>
+              <div class="quick-card-body">
+                <div class="quick-card-title">启动项管理</div>
+                <div class="quick-card-desc">禁用开机自启，加快开机</div>
+              </div>
+              <svg class="quick-card-arrow"><use href="#icon-chevron"/></svg>
+            </div>
+          </div>
+
+            <!-- Recent Activity -->
+            <div class="recent-activity" id="recentActivity" style="display:none;">
+              <div class="recent-activity-title">最近操作</div>
+              <div class="recent-list" id="recentList"></div>
+            </div>
+        </div>
+      </section>
+
+      <!-- Speedup Page -->
+      <section id="view-speedup" class="view">
+        <div class="page-header">
+          <div class="page-header-left">
+            <h2 class="page-title" id="speedupTitle">扫描中，发现 0 个优化项...</h2>
+            <p class="page-desc">全面提升电脑速度，优化系统性能</p>
+          </div>
+          <div class="page-header-right">
+            <button class="btn btn-secondary" id="speedupAction">取消扫描</button>
+          </div>
+        </div>
+        <div class="progress-container" id="speedupProgressWrap">
+          <div class="progress-bar">
+            <div class="progress-fill indeterminate" id="speedupProgressFill"></div>
+          </div>
+        </div>
+        <div class="scan-items speedup-cards" id="speedupItems"></div>
+      </section>
+
+      <!-- Clean Page -->
+      <section id="view-clean" class="view">
+        <div class="page-header">
+          <div class="clean-tabs" id="cleanTabs">
+            <button class="tab active" data-tab="trash">清理垃圾</button>
+            <button class="tab" data-tab="software">清理软件</button>
+            <button class="tab" data-tab="plugin">清理插件</button>
+            <span class="tab-indicator" aria-hidden="true"></span>
+          </div>
+        </div>
+        <div class="clean-scan-status" id="cleanScanStatus">
+          <span class="scan-path" id="cleanScanPath">正在扫描...</span>
+          <button class="btn btn-text" id="cleanCancelBtn">取消</button>
+        </div>
+        <div class="clean-header-info" id="cleanHeaderInfo" style="display:none;">
+          <div class="clean-header-left">
+            <span class="clean-header-title" id="cleanHeaderTitle">扫描完成</span>
+            <span class="clean-header-size" id="cleanHeaderSize"></span>
+            <span class="clean-header-status" id="cleanHeaderStatus"></span>
+          </div>
+          <button class="btn btn-text clean-rescan-btn" id="cleanRescanBtn" style="display:none;">返回重新扫描</button>
+        </div>
+        <div class="progress-container" id="cleanProgressWrap">
+          <div class="progress-bar">
+            <div class="progress-fill indeterminate" id="cleanProgressFill"></div>
+          </div>
+        </div>
+        <div class="clean-groups" id="cleanGroups"></div>
+        <div class="floating-bar" id="cleanFloatingBar" style="display:none;">
+          <div class="floating-bar-text-wrap">
+            <span class="floating-bar-text" id="cleanFloatingText" aria-live="polite">已勾选：<strong>--</strong></span>
+            <span class="floating-bar-subtext" id="cleanFloatingSubText">清理后可释放磁盘空间</span>
+          </div>
+          <div class="floating-bar-actions">
+            <button class="btn btn-primary clean-fangxin-btn" id="cleanFangxinBtn">放心清理</button>
+            <button class="btn btn-secondary" id="cleanExecuteBtn">立即清理</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Startup Page -->
+      <section id="view-startup" class="view">
+        <div class="page-header">
+          <div class="startup-tabs" id="startupTabs">
+            <button class="tab active" data-tab="software">软件启动项</button>
+            <button class="tab" data-tab="scheduled">计划任务</button>
+            <button class="tab" data-tab="system">系统启动项</button>
+            <button class="tab" data-tab="contextmenu">右键菜单</button>
+            <button class="tab" data-tab="explorerplugin">资源管理器插件</button>
+            <span class="tab-indicator" aria-hidden="true"></span>
+          </div>
+        </div>
+        <div class="startup-table-wrap">
+          <table class="startup-table">
+            <thead>
+              <tr>
+                <th class="th-check"><input type="checkbox" id="startupCheckAll" title="全选"></th>
+                <th class="th-name">软件名称</th>
+                <th class="th-ban">禁止率</th>
+                <th class="th-time">启动用时</th>
+                <th class="th-suggest">建议</th>
+                <th class="th-status">当前状态</th>
+                <th class="th-actions">操作</th>
+              </tr>
+            </thead>
+            <tbody id="startupList"></tbody>
+          </table>
+        </div>
+        <div class="startup-empty" id="startupEmpty" style="display:none;">
+          <div class="startup-empty-illustration">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0H4"/></svg>
+          </div>
+          <p class="text-tertiary">未发现需要处理的项目</p>
+        </div>
+        <div class="startup-loading" id="startupLoading" style="display:none;">
+          <div class="startup-spinner"></div>
+          <span class="startup-loading-text">正在加载启动项…</span>
+        </div>
+        <div class="startup-toolbar" id="startupToolbar">
+          <div class="startup-toolbar-left">
+            <div class="search-box">
+              <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              <input type="text" id="startupSearch" class="search-input" placeholder="搜索启动项名称 / 路径…">
+            </div>
+            <label class="checkbox-label">
+              <input type="checkbox" id="hideDisabled">
+              <span class="checkbox-custom"></span>
+              隐藏已禁用项
+            </label>
+          </div>
+          <div class="startup-toolbar-right">
+            <button class="btn btn-ghost" id="startupBackupBtn" title="备份当前启动项状态">备份</button>
+            <button class="btn btn-ghost" id="startupRestoreBtn" title="从备份恢复">恢复</button>
+            <button class="btn btn-primary" id="startupAddBtn">添加启动项</button>
+          </div>
+        </div>
+        <div class="floating-bar" id="startupFloatingBar" style="display:none;">
+          <span class="floating-bar-text" id="startupFloatingText" aria-live="polite">已选择 0 个启动项</span>
+          <button class="btn btn-primary" id="smartOptimizeBtn">一键智能优化</button>
+        </div>
+        <div class="floating-bar" id="startupBatchBar" style="display:none;">
+          <span class="floating-bar-text" id="startupBatchText">已选择 0 个启动项</span>
+          <button class="btn btn-secondary" id="batchDisableBtn">批量禁用</button>
+          <button class="btn btn-secondary" id="batchEnableBtn">批量启用</button>
+          <button class="btn btn-danger" id="batchRemoveBtn">批量删除</button>
+          <button class="btn btn-ghost" id="batchClearBtn">取消选择</button>
+        </div>
+
+        <!-- 详情弹窗 (F6) -->
+        <div class="modal-overlay" id="startupDetailModal" style="display:none;">
+          <div class="modal">
+            <div class="modal-header">
+              <h3>启动项详情</h3>
+              <button class="modal-close" data-close="startupDetailModal">&times;</button>
+            </div>
+            <div class="modal-body" id="startupDetailBody"></div>
+          </div>
+        </div>
+
+        <!-- 添加启动项弹窗 (F1) -->
+        <div class="modal-overlay" id="startupAddModal" style="display:none;">
+          <div class="modal">
+            <div class="modal-header">
+              <h3>添加启动项</h3>
+              <button class="modal-close" data-close="startupAddModal">&times;</button>
+            </div>
+            <div class="modal-body">
+              <label class="form-label">名称</label>
+              <input type="text" id="addName" class="form-input" placeholder="如 MyApp" autocomplete="off">
+              <label class="form-label">命令 / 路径</label>
+              <input type="text" id="addCommand" class="form-input" placeholder="如 C:\Path\app.exe" autocomplete="off">
+              <label class="form-label">位置</label>
+              <select id="addLocation" class="form-input">
+                <option value="hkcu_run">注册表 当前用户 Run (HKCU)</option>
+                <option value="startup_folder">启动文件夹 (开始菜单)</option>
+              </select>
+              <p class="form-hint" id="addHint"></p>
+            </div>
+            <div class="modal-footer">
+              <button class="btn btn-ghost" data-close="startupAddModal">取消</button>
+              <button class="btn btn-primary" id="addConfirmBtn">添加</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 备份恢复弹窗 (F2) -->
+        <div class="modal-overlay" id="startupBackupModal" style="display:none;">
+          <div class="modal">
+            <div class="modal-header">
+              <h3>恢复启动项备份</h3>
+              <button class="modal-close" data-close="startupBackupModal">&times;</button>
+            </div>
+            <div class="modal-body">
+              <div id="startupBackupList" class="backup-list"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Shredder Page -->
+      <section id="view-shredder" class="view">
+        <div class="page-header">
+          <h2 class="page-title">文件粉碎机</h2>
+          <p class="page-subtitle">永久删除敏感文件，无法恢复</p>
+        </div>
+
+        <div class="shredder-body">
+          <!-- Drop zone -->
+          <div class="shredder-drop-zone" id="shredderDropZone">
+            <svg class="shredder-drop-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#icon-shredder"/></svg>
+            <p class="shredder-drop-text">拖拽文件 / 文件夹到此处</p>
+            <p class="shredder-drop-hint">或点击下方按钮添加</p>
+            <div class="shredder-drop-btns">
+              <button class="btn btn-ghost" id="shredderAddFile">添加文件</button>
+              <button class="btn btn-ghost" id="shredderAddFolder">添加文件夹</button>
+            </div>
+          </div>
+
+          <!-- Settings row -->
+          <div class="shredder-settings">
+            <div class="shredder-setting-group">
+              <label class="shredder-setting-label">粉碎方式</label>
+              <select class="form-input" id="shredderMethod">
+                <option value="zero">一次零覆盖（快速）</option>
+                <option value="random">随机数据覆盖</option>
+                <option value="dod" selected>DoD 5220.22-M（3 次，推荐）</option>
+              </select>
+            </div>
+            <div class="shredder-setting-group">
+              <label class="shredder-setting-label">覆盖次数</label>
+              <input type="number" class="form-input" id="shredderPasses" min="1" max="10" value="3">
+            </div>
+          </div>
+
+          <!-- File queue -->
+          <div class="shredder-queue" id="shredderQueue">
+            <p class="text-tertiary shredder-empty" id="shredderEmpty">尚未添加任何文件</p>
+          </div>
+
+          <!-- Action bar -->
+          <div class="shredder-actions" id="shredderActions" style="display:none;">
+            <button class="btn btn-danger" id="shredderShredBtn">开始粉碎</button>
+            <button class="btn btn-ghost" id="shredderCancelBtn" style="display:none;">取消</button>
+            <button class="btn btn-ghost" id="shredderClearBtn">清空列表</button>
+          </div>
+
+          <!-- Progress -->
+          <div class="shredder-progress" id="shredderProgress" style="display:none;">
+            <div class="shredder-progress-bar">
+              <div class="shredder-progress-fill" id="shredderProgressFill"></div>
+            </div>
+            <span class="shredder-progress-text" id="shredderProgressText">0%</span>
+          </div>
+
+          <!-- Results -->
+          <div class="shredder-results" id="shredderResults" style="display:none;"></div>
+        </div>
+      </section>
+
+      <!-- Settings Page -->
+      <section id="view-settings" class="view">
+        <div class="page-header">
+          <h2 class="page-title">设置</h2>
+          <p class="page-subtitle">管理启动行为与个性化选项</p>
+        </div>
+
+        <div class="settings-layout">
+          <!-- Left: options -->
+          <div class="settings-options">
+            <div class="settings-group">
+              <h3 class="settings-group-title">外观</h3>
+              <div class="setting-row">
+                <div class="setting-row-text">
+                  <div class="setting-row-label">配色方案</div>
+                  <div class="setting-row-desc">选择你喜欢的主题色调</div>
+                </div>
+                <div class="theme-swatches" id="themeSwatches">
+                  <button class="theme-swatch" data-theme="sky" title="晴空蓝" style="--swatch:#0284C7"></button>
+                  <button class="theme-swatch" data-theme="emerald" title="翡翠绿" style="--swatch:#059669"></button>
+                  <button class="theme-swatch" data-theme="violet" title="暮光紫" style="--swatch:#7C3AED"></button>
+                  <button class="theme-swatch" data-theme="orange" title="落日橙" style="--swatch:#EA580C"></button>
+                  <button class="theme-swatch" data-theme="rose" title="樱花粉" style="--swatch:#E11D48"></button>
+                  <button class="theme-swatch" data-theme="teal" title="深海青" style="--swatch:#0F766E"></button>
+                </div>
+              </div>
+            </div>
+
+            <div class="settings-group">
+              <h3 class="settings-group-title">启动</h3>
+              <div class="setting-row">
+                <div class="setting-row-text">
+                  <div class="setting-row-label">开机自动启动并最小化到任务栏</div>
+                  <div class="setting-row-desc">系统启动时自动运行本工具，并以最小化方式驻留。</div>
+                </div>
+                <label class="switch">
+                  <input type="checkbox" id="setAutostart">
+                  <span class="switch-track"><span class="switch-thumb"></span></span>
+                </label>
+              </div>
+              <div class="setting-row">
+                <div class="setting-row-text">
+                  <div class="setting-row-label">关闭前确认退出</div>
+                  <div class="setting-row-desc">点击关闭按钮时弹出确认，避免误退出。</div>
+                </div>
+                <label class="switch">
+                  <input type="checkbox" id="setConfirmClose">
+                  <span class="switch-track"><span class="switch-thumb"></span></span>
+                </label>
+              </div>
+            </div>
+
+            <div class="settings-group">
+              <h3 class="settings-group-title">数据</h3>
+              <div class="setting-row">
+                <div class="setting-row-text">
+                  <div class="setting-row-label">清除使用统计数据</div>
+                  <div class="setting-row-desc">清空累计清理量与历史记录，此操作不可撤销。</div>
+                </div>
+                <button class="btn btn-secondary" id="setClearStats">清除</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: author card -->
+          <aside class="author-card">
+            <img class="author-avatar" src="avatar.png" alt="GeLith 头像">
+            <div class="author-name">GeLith</div>
+            <div class="author-role">开源系统优化工具作者</div>
+            <p class="author-bio">垃圾清理、系统加速、启动项管理与文件粉碎，一站式让电脑保持轻盈。欢迎到 GitHub 关注与交流。</p>
+            <div class="author-meta">
+              <div class="author-meta-item">
+                <span class="author-meta-label">版本</span>
+                <span class="author-meta-value" id="authorVersion">1.0.0</span>
+              </div>
+              <div class="author-meta-item">
+                <span class="author-meta-label">框架</span>
+                <span class="author-meta-value">Tauri</span>
+              </div>
+            </div>
+            <div class="author-links">
+              <a class="author-link" href="https://github.com/GeLith" id="authorGithub">GitHub 主页</a>
+              <a class="author-link" href="https://github.com/GeLith/issues" id="authorFeedback">反馈问题</a>
+              <a class="author-link" href="https://github.com/GeLith/releases" id="authorUpdate">检查更新</a>
+            </div>
+            <p class="author-foot">© 2026 GeLith · 基于 Tauri 构建</p>
+          </aside>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- API Fallback Notice -->
+  <div id="apiFallback" class="api-fallback" style="display:none;">
+    <p>后端接口未就绪，请确认 Electron 主进程已加载。</p>
+  </div>
+
+  <!-- 回到顶部悬浮按钮 -->
+  <button class="back-to-top-fab" id="backToTopBtn" title="回到顶部">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="18 15 12 9 6 15"></polyline>
+    </svg>
+  </button>
+
+  <script src="js/api-shim.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/pages.js"></script>
+</body>
+</html>

@@ -1,0 +1,770 @@
+{
+  "source": "cleancfg.xml",
+  "total": 75,
+  "items": [
+    {
+      "proc": "360chrome.exe",
+      "id": "sysid=3205",
+      "name": "360极速浏览器"
+    },
+    {
+      "proc": "QQBrowser.exe",
+      "id": "sysid=3204",
+      "name": "QQ浏览器"
+    },
+    {
+      "proc": "SogouExplorer.exe",
+      "id": "sysid=3202;sysid=2720",
+      "name": "搜狗浏览器"
+    },
+    {
+      "proc": "UCBrowser.exe",
+      "id": "sysid=3330",
+      "name": "UC浏览器"
+    },
+    {
+      "proc": "2345chrome.exe",
+      "id": "sysid=4500",
+      "name": "2345加速浏览器"
+    },
+    {
+      "proc": "2345Explorer.exe",
+      "id": "sysid=6124",
+      "name": "2345加速浏览器"
+    },
+    {
+      "proc": "Chrome.exe",
+      "id": "sysid=3208",
+      "name": "Chrome浏览器"
+    },
+    {
+      "proc": "Maxthon.exe",
+      "id": "sysid=3201",
+      "name": "傲游浏览器"
+    },
+    {
+      "proc": "yyexplorer.exe",
+      "id": "sysid=6211",
+      "name": "YY浏览器"
+    },
+    {
+      "proc": "liebao.exe",
+      "id": "sysid=4011",
+      "name": "猎豹浏览器"
+    },
+    {
+      "proc": "Safari.exe",
+      "id": "sysid=3203",
+      "name": "Safari浏览器"
+    },
+    {
+      "proc": "WebGamegt.exe",
+      "id": "sysid=3215",
+      "name": "GT游戏浏览器"
+    },
+    {
+      "proc": "TWchrome.exe",
+      "id": "sysid=3206",
+      "name": "世界之窗浏览器"
+    },
+    {
+      "proc": "TheWorld.exe",
+      "id": "sysid=3216",
+      "name": "世界之窗浏览器"
+    },
+    {
+      "proc": "opera.exe",
+      "id": "sysid=3207",
+      "name": "Opera浏览器"
+    },
+    {
+      "proc": "seamonkey.exe",
+      "id": "sysid=3102",
+      "name": "SeaMonkey浏览器"
+    },
+    {
+      "proc": "orca.exe",
+      "id": "sysid=3103",
+      "name": "Orca浏览器"
+    },
+    {
+      "proc": "Luna.exe",
+      "id": "sysid=3106",
+      "name": "Lunascape浏览器"
+    },
+    {
+      "proc": "icedragon.exe",
+      "id": "sysid=3009",
+      "name": "冰龙浏览器"
+    },
+    {
+      "proc": "cometbrowser.exe",
+      "id": "sysid=3005",
+      "name": "彗星浏览器"
+    },
+    {
+      "proc": "baidubrowser.exe",
+      "id": "sysid=6003",
+      "name": "百度浏览器"
+    },
+    {
+      "proc": "hao123browser.exe",
+      "id": "sysid=4515",
+      "name": "百度hao123浏览器"
+    },
+    {
+      "proc": "baiduplayerbrowser.exe",
+      "id": "sysid=6013",
+      "name": "百度影音浏览器"
+    },
+    {
+      "proc": "115Chrome.exe",
+      "id": "sysid=6224",
+      "name": "115极速浏览器"
+    },
+    {
+      "proc": "hao123Juzi.exe",
+      "id": "sysid=3641",
+      "name": "桔子浏览器"
+    },
+    {
+      "proc": "KWExplorer.exe",
+      "id": "sysid=3640",
+      "name": "快玩浏览器"
+    },
+    {
+      "proc": "GamesBrowser.exe",
+      "id": "sysid=3639",
+      "name": "17173游戏浏览器"
+    },
+    {
+      "proc": "Alibrowser.exe",
+      "id": "sysid=6004",
+      "name": "阿云浏览器"
+    },
+    {
+      "proc": "KChrome.exe",
+      "id": "sysid=6008",
+      "name": "快快浏览器"
+    },
+    {
+      "proc": "TaoBrowser.exe",
+      "id": "sysid=4067",
+      "name": "淘宝浏览器"
+    },
+    {
+      "proc": "Tango3.exe",
+      "id": "sysid=6111",
+      "name": "糖果游戏浏览器"
+    },
+    {
+      "proc": "Tianma.exe",
+      "id": "sysid=6011",
+      "name": "天马浏览器"
+    },
+    {
+      "proc": "AirView.exe",
+      "id": "sysid=4070",
+      "name": "云游浏览器"
+    },
+    {
+      "proc": "yfe.exe",
+      "id": "sysid=4271",
+      "name": "云帆影视浏览器"
+    },
+    {
+      "proc": "720_browser.exe",
+      "id": "sysid=4272",
+      "name": "720浏览器"
+    },
+    {
+      "proc": "alichrome.exe",
+      "id": "sysid=4350",
+      "name": "游侠游戏浏览器"
+    },
+    {
+      "proc": "7chrome.exe",
+      "id": "sysid=4351",
+      "name": "七星浏览器"
+    },
+    {
+      "proc": "taomeebrowser.exe",
+      "id": "sysid=3000",
+      "name": "淘米儿童浏览器"
+    },
+    {
+      "proc": "srie.exe",
+      "id": "sysid=3002",
+      "name": "超级兔子浏览器"
+    },
+    {
+      "proc": "caimao.exe",
+      "id": "sysid=3008",
+      "name": "财猫省钱浏览器"
+    },
+    {
+      "proc": "wisecloudbrowser.exe",
+      "id": "sysid=2810",
+      "name": "智慧云浏览器"
+    },
+    {
+      "proc": "firefox.exe",
+      "id": "sysid=3209",
+      "name": "Firefox浏览器"
+    },
+    {
+      "proc": "ChromeCore.exe",
+      "id": "sysid=5632",
+      "name": "双核浏览器"
+    },
+    {
+      "proc": "TSBrowser.exe",
+      "id": "sysid=3470",
+      "name": "极速浏览器"
+    },
+    {
+      "proc": "shouxin.exe",
+      "id": "sysid=2805",
+      "name": "手心浏览器"
+    },
+    {
+      "proc": "WnBrowser.exe",
+      "id": "sysid=3744",
+      "name": "万能浏览器"
+    },
+    {
+      "proc": "7654Browser.exe",
+      "id": "sysid=5635",
+      "name": "7654浏览器"
+    },
+    {
+      "proc": "2144Browser.exe",
+      "id": "sysid=2832",
+      "name": "2144浏览器"
+    },
+    {
+      "proc": "SLBrowser.exe",
+      "id": "sysid=3471",
+      "name": "联想浏览器"
+    },
+    {
+      "proc": "EastBrowser.exe",
+      "id": "sysid=5498",
+      "name": "东方浏览器"
+    },
+    {
+      "proc": "alphase.exe",
+      "id": "sysid=3435",
+      "name": "阿尔法安全浏览器"
+    },
+    {
+      "proc": "SHPlayer.exe",
+      "id": "sysid=2036",
+      "name": "搜狐影音"
+    },
+    {
+      "proc": "JJPlayer.exe",
+      "id": "sysid=4410",
+      "name": "吉吉影音"
+    },
+    {
+      "proc": "LeTVLoader.exe",
+      "id": "sysid=2737",
+      "name": "乐视视频"
+    },
+    {
+      "proc": "Funshion.exe",
+      "id": "sysid=2025",
+      "name": "风行视频播放器"
+    },
+    {
+      "proc": "splayer.exe",
+      "id": "sysid=3425",
+      "name": "射手影音播放器"
+    },
+    {
+      "proc": "BaiduPlayer.exe",
+      "id": "sysid=3500",
+      "name": "百度影音"
+    },
+    {
+      "proc": "XiGuaPlayer.exe",
+      "id": "sysid=4096",
+      "name": "西瓜影视"
+    },
+    {
+      "proc": "KKP.exe",
+      "id": "sysid=2862",
+      "name": "看看影音"
+    },
+    {
+      "proc": "rrplayer.exe",
+      "id": "sysid=3892",
+      "name": "人人影视"
+    },
+    {
+      "proc": "QvodPlayer.exe",
+      "id": "sysid=2029",
+      "name": "快播"
+    },
+    {
+      "proc": "StormPlayer.exe",
+      "id": "sysid=2028",
+      "name": "暴风影音5"
+    },
+    {
+      "proc": "StormPlayer9.exe",
+      "id": "sysid=2028",
+      "name": "暴风影音16"
+    },
+    {
+      "proc": "GeePlayer.exe",
+      "id": "sysid=2770",
+      "name": "爱奇艺万能播放器"
+    },
+    {
+      "proc": "XMP.exe",
+      "id": "sysid=2023",
+      "name": "迅雷看看"
+    },
+    {
+      "proc": "QQPlayer.exe",
+      "id": "sysid=2038",
+      "name": "QQ影音"
+    },
+    {
+      "proc": "CBox.exe",
+      "id": "sysid=5328",
+      "name": "央视影音"
+    },
+    {
+      "proc": "HunanTV.exe",
+      "id": "sysid=2421",
+      "name": "芒果tv"
+    },
+    {
+      "proc": "芒果TV极速版.exe",
+      "id": "sysid=2421",
+      "name": "芒果TV极速版"
+    },
+    {
+      "proc": "PPLive.exe",
+      "id": "sysid=4099",
+      "name": "pp视频"
+    },
+    {
+      "proc": "xfplay.exe",
+      "id": "sysid=9995",
+      "name": "影音先锋"
+    },
+    {
+      "proc": "QiyiClient.exe",
+      "id": "sysid=9996",
+      "name": "爱奇艺"
+    },
+    {
+      "proc": "QyClient.exe",
+      "id": "sysid=9996",
+      "name": "爱奇艺"
+    },
+    {
+      "proc": "YoukuDesktop.exe",
+      "id": "sysid=3301",
+      "name": "优酷"
+    },
+    {
+      "proc": "QQLive.exe",
+      "id": "sysid=3027",
+      "name": "腾讯视频"
+    }
+  ],
+  "smartClean": {
+    "trashInternal": [
+      "ie_chache",
+      "sysid=3000",
+      "sysid=3002",
+      "sysid=3005",
+      "sysid=3008",
+      "sysid=3009",
+      "sysid=3075",
+      "sysid=3102",
+      "sysid=3103",
+      "sysid=3106",
+      "sysid=3107",
+      "sysid=3201",
+      "sysid=3202",
+      "sysid=3203",
+      "sysid=3204",
+      "sysid=3205",
+      "sysid=3206",
+      "sysid=3207",
+      "sysid=3208",
+      "sysid=3209",
+      "sysid=3210",
+      "sysid=3215",
+      "sysid=3216",
+      "sysid=3330",
+      "sysid=4011",
+      "sysid=4067",
+      "sysid=4070",
+      "sysid=4500",
+      "sysid=4515",
+      "sysid=5999",
+      "sysid=6000",
+      "sysid=6001",
+      "sysid=6002",
+      "sysid=6003",
+      "sysid=6004",
+      "sysid=6008",
+      "sysid=6009",
+      "sysid=6011",
+      "sysid=6013",
+      "sysid=6111",
+      "sysid=6124",
+      "sysid=6211",
+      "sysid=6224",
+      "sysid=9986",
+      "sysid=8993",
+      "sysid=3303",
+      "sysid=2024",
+      "sysid=9991",
+      "sysid=2031",
+      "sysid=2038",
+      "sysid=9998",
+      "sysid=3305",
+      "sysid=9996",
+      "sysid=4210",
+      "sysid=4000",
+      "sysid=3500",
+      "sysid=3501",
+      "sysid=2028",
+      "sysid=8997",
+      "sysid=8999",
+      "sysid=2034",
+      "sysid=2125",
+      "sysid=2025",
+      "sysid=2027",
+      "sysid=8998",
+      "sysid=2029",
+      "sysid=3042",
+      "sysid=9987",
+      "sysid=8989",
+      "sysid=2030",
+      "sysid=2136",
+      "sysid=2036",
+      "sysid=2026",
+      "sysid=2126",
+      "sysid=3081",
+      "sysid=4096",
+      "sysid=9992",
+      "sysid=2023",
+      "sysid=9988",
+      "sysid=3301",
+      "sysid=9995",
+      "sysid=2010",
+      "sysid=2008",
+      "sysid=2020",
+      "sysid=2007",
+      "sysid=2016",
+      "sysid=2012",
+      "sysid=2014",
+      "sysid=2013",
+      "sysid=2002",
+      "sysid=2003",
+      "sysid=2019",
+      "sysid=2021",
+      "sysid=2006",
+      "sysid=2005",
+      "sysid=2011",
+      "sysid=4083",
+      "sysid=3129",
+      "sysid=4022",
+      "sysid=3046",
+      "sysid=2139",
+      "sysid=7004",
+      "sysid=4505",
+      "sysid=7105",
+      "sysid=7005",
+      "sysid=2004",
+      "sysid=4511",
+      "sysid=4513",
+      "sysid=4012",
+      "sysid=4013",
+      "sysid=4057",
+      "sysid=4020",
+      "sysid=2040",
+      "sysid=3414",
+      "sysid=3404",
+      "sysid=4064",
+      "sysid=4004",
+      "sysid=3406",
+      "sysid=3403",
+      "sysid=4062",
+      "sysid=4162",
+      "sysid=4065",
+      "sysid=4009",
+      "sysid=4199",
+      "sysid=4099",
+      "sysid=4005",
+      "sysid=6007",
+      "sysid=3105",
+      "sysid=6006",
+      "sysid=4006",
+      "sysid=4503",
+      "sysid=4082",
+      "sysid=4512",
+      "sysid=4063",
+      "sysid=2009",
+      "sysid=2300",
+      "sysid=2301",
+      "sysid=4066",
+      "sysid=3331",
+      "sysid=3022",
+      "sysid=3014",
+      "sysid=3019",
+      "sysid=2129",
+      "sysid=4002",
+      "sysid=2303",
+      "sysid=4510",
+      "sysid=4313",
+      "sysid=4212",
+      "sysid=4003",
+      "sysid=2119",
+      "sysid=3024",
+      "sysid=3004",
+      "sysid=3003",
+      "sysid=3007",
+      "sysid=4084",
+      "sysid=4184",
+      "sysid=4185",
+      "sysid=4097",
+      "sysid=3051",
+      "sysid=7003",
+      "sysid=7000",
+      "sysid=3402",
+      "sysid=7001",
+      "sysid=7009",
+      "sysid=3025",
+      "sysid=3405",
+      "sysid=3048",
+      "sysid=3348",
+      "sysid=3148",
+      "sysid=3248",
+      "sysid=4016",
+      "sysid=2018",
+      "sysid=4061",
+      "sysid=3401",
+      "sysid=3411",
+      "sysid=3011",
+      "sysid=4010",
+      "sysid=3016",
+      "sysid=3018",
+      "sysid=3130",
+      "sysid=3050",
+      "sysid=4069",
+      "sysid=4179",
+      "sysid=4101",
+      "sysid=3600",
+      "sysid=3012",
+      "sysid=3128",
+      "sysid=4501",
+      "sysid=3152",
+      "sysid=3070",
+      "sysid=4095",
+      "sysid=4508",
+      "sysid=4195",
+      "sysid=4295",
+      "sysid=3332",
+      "sysid=4297",
+      "sysid=7002",
+      "sysid=3124",
+      "sysid=3104",
+      "sysid=4497",
+      "sysid=3334",
+      "sysid=3114",
+      "sysid=3079",
+      "sysid=4001",
+      "sysid=2113",
+      "sysid=2114",
+      "sysid=2115",
+      "sysid=2112",
+      "sysid=2306",
+      "sysid=4502",
+      "sysid=3043",
+      "sysid=3067",
+      "sysid=3044",
+      "sysid=3080",
+      "sysid=3021",
+      "sysid=3045",
+      "sysid=3015",
+      "sysid=3013",
+      "sysid=4129",
+      "sysid=4456",
+      "sysid=4459",
+      "sysid=4131",
+      "sysid=4130",
+      "sysid=4458",
+      "sysid=3052",
+      "sysid=4470",
+      "sysid=4471",
+      "sysid=4478",
+      "sysid=4479",
+      "sysid=4648",
+      "sysid=4649",
+      "sysid=4135",
+      "sysid=4475",
+      "sysid=4476",
+      "sysid=4250",
+      "sysid=4251",
+      "sysid=4472",
+      "sysid=4473",
+      "sysid=4117",
+      "sysid=4504",
+      "sysid=4643",
+      "sysid=4014",
+      "sysid=4257",
+      "sysid=3336",
+      "sysid=4641",
+      "sysid=4642",
+      "sysid=4496",
+      "sysid=4460",
+      "sysid=4656",
+      "sysid=4657",
+      "sysid=4464",
+      "sysid=4465",
+      "sysid=4463",
+      "sysid=4467",
+      "sysid=4115",
+      "sysid=4507",
+      "sysid=4122",
+      "sysid=4482",
+      "sysid=4483",
+      "sysid=4541",
+      "sysid=4542",
+      "sysid=4543",
+      "sysid=4116",
+      "sysid=4258",
+      "sysid=4468",
+      "sysid=4469",
+      "sysid=4235",
+      "sysid=4254",
+      "sysid=4255",
+      "sysid=4498",
+      "sysid=4499",
+      "sysid=4659",
+      "sysid=4660",
+      "sysid=4134",
+      "sysid=2307",
+      "sysid=4486",
+      "sysid=4487",
+      "sysid=4451",
+      "sysid=4452",
+      "sysid=4480",
+      "sysid=4637",
+      "sysid=4638",
+      "sysid=4490",
+      "sysid=4491",
+      "sysid=4243",
+      "sysid=4119",
+      "sysid=4241",
+      "sysid=4539",
+      "sysid=4540",
+      "sysid=4534",
+      "sysid=4535",
+      "sysid=4635",
+      "sysid=4636",
+      "sysid=4488",
+      "sysid=4489",
+      "sysid=4230",
+      "sysid=4231",
+      "sysid=4658",
+      "sysid=4453",
+      "sysid=4455",
+      "sysid=4461",
+      "sysid=4237",
+      "sysid=4347",
+      "sysid=4445",
+      "sysid=4532",
+      "sysid=4533",
+      "sysid=4132",
+      "sysid=4247",
+      "sysid=4121",
+      "sysid=4133",
+      "sysid=2214",
+      "sysid=2215",
+      "sysid=4123",
+      "sysid=4509",
+      "sysid=4228",
+      "sysid=4233",
+      "sysid=4232",
+      "sysid=4127",
+      "sysid=4245",
+      "sysid=4639",
+      "sysid=4640",
+      "sysid=4263",
+      "sysid=4253",
+      "sysid=4252",
+      "sysid=4474",
+      "sysid=4477",
+      "sysid=4234",
+      "sysid=4538",
+      "sysid=4118",
+      "sysid=4450",
+      "sysid=4256",
+      "sysid=4485",
+      "sysid=4654",
+      "sysid=4655",
+      "sysid=4357",
+      "sysid=4125",
+      "sysid=4344",
+      "sysid=4345",
+      "sysid=4244",
+      "sysid=3333",
+      "sysid=4492",
+      "sysid=4493",
+      "sysid=4484",
+      "sysid=4327",
+      "sysid=4328",
+      "sysid=4650",
+      "sysid=4651",
+      "sysid=4427",
+      "sysid=4428",
+      "sysid=4646",
+      "sysid=4647",
+      "sysid=4227",
+      "sysid=4114",
+      "sysid=4462",
+      "sysid=4248",
+      "sysid=4249",
+      "sysid=4536",
+      "sysid=4537",
+      "sysid=4124",
+      "sysid=4242",
+      "sysid=4353",
+      "sysid=4652",
+      "sysid=4653",
+      "sysid=4128",
+      "sysid=4644",
+      "sysid=4645",
+      "sys_tmp",
+      "sys_thumb",
+      "sys_mem_zhuanchu",
+      "sys_win_err_report",
+      "sys_update_files",
+      "sys_logs",
+      "sysid=2022",
+      "sysid=3023",
+      "sysid=3473",
+      "sysid=3278",
+      "sysid=3131",
+      "sysid=3132",
+      "sysid=3173",
+      "sysid=3178",
+      "sysid=3078",
+      "sysid=3099",
+      "sysid=3112",
+      "sysid=3101",
+      "sysid=2015"
+    ]
+  }
+}
