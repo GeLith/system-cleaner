@@ -1,0 +1,1131 @@
+{
+  "source": "timerefer.dat (XOR 0x54)",
+  "total": 225,
+  "entries": [
+    {
+      "mark": 17,
+      "service": "Alerter",
+      "baseTimeMs": 28.6
+    },
+    {
+      "mark": 17,
+      "service": "ALG",
+      "baseTimeMs": 131.4
+    },
+    {
+      "mark": 17,
+      "service": "AppMgmt",
+      "baseTimeMs": 244
+    },
+    {
+      "mark": 17,
+      "service": "AudioSrv",
+      "baseTimeMs": 129.8
+    },
+    {
+      "mark": 17,
+      "service": "BITS",
+      "baseTimeMs": 111.8
+    },
+    {
+      "mark": 17,
+      "service": "Browser",
+      "baseTimeMs": 43.2
+    },
+    {
+      "mark": 17,
+      "service": "CiSvc",
+      "baseTimeMs": 162.6
+    },
+    {
+      "mark": 17,
+      "service": "ClipSrv",
+      "baseTimeMs": 375.2
+    },
+    {
+      "mark": 17,
+      "service": "clr_optimization_v2.0.50727_32",
+      "baseTimeMs": 131.4
+    },
+    {
+      "mark": 17,
+      "service": "COMSysApp",
+      "baseTimeMs": 404.8
+    },
+    {
+      "mark": 17,
+      "service": "CryptSvc",
+      "baseTimeMs": 14
+    },
+    {
+      "mark": 17,
+      "service": "DcomLaunch",
+      "baseTimeMs": 60
+    },
+    {
+      "mark": 17,
+      "service": "Dhcp",
+      "baseTimeMs": 22.4
+    },
+    {
+      "mark": 17,
+      "service": "dmadmin",
+      "baseTimeMs": 894.4
+    },
+    {
+      "mark": 17,
+      "service": "dmserver",
+      "baseTimeMs": 16
+    },
+    {
+      "mark": 17,
+      "service": "Dnscache",
+      "baseTimeMs": 90
+    },
+    {
+      "mark": 17,
+      "service": "Dot3svc",
+      "baseTimeMs": 60
+    },
+    {
+      "mark": 17,
+      "service": "EapHost",
+      "baseTimeMs": 60
+    },
+    {
+      "mark": 17,
+      "service": "Eventlog",
+      "baseTimeMs": 60
+    },
+    {
+      "mark": 17,
+      "service": "EventSystem",
+      "baseTimeMs": 60
+    },
+    {
+      "mark": 17,
+      "service": "FastUserSwitchingCompatibility",
+      "baseTimeMs": 24.8
+    },
+    {
+      "mark": 17,
+      "service": "helpsvc",
+      "baseTimeMs": 47.2
+    },
+    {
+      "mark": 17,
+      "service": "HidServ",
+      "baseTimeMs": 60
+    },
+    {
+      "mark": 17,
+      "service": "hkmsvc",
+      "baseTimeMs": 72
+    },
+    {
+      "mark": 17,
+      "service": "HTTPFilter",
+      "baseTimeMs": 306.8
+    },
+    {
+      "mark": 17,
+      "service": "ImapiService",
+      "baseTimeMs": 152.2
+    },
+    {
+      "mark": 17,
+      "service": "lanmanserver",
+      "baseTimeMs": 2792
+    },
+    {
+      "mark": 17,
+      "service": "lanmanworkstation",
+      "baseTimeMs": 150
+    },
+    {
+      "mark": 17,
+      "service": "LmHosts",
+      "baseTimeMs": 30.8
+    },
+    {
+      "mark": 17,
+      "service": "Messenger",
+      "baseTimeMs": 84.4
+    },
+    {
+      "mark": 17,
+      "service": "mnmsrvc",
+      "baseTimeMs": 60
+    },
+    {
+      "mark": 17,
+      "service": "MSDTC",
+      "baseTimeMs": 669.8
+    },
+    {
+      "mark": 17,
+      "service": "MSIServer",
+      "baseTimeMs": 218.8
+    },
+    {
+      "mark": 17,
+      "service": "napagent",
+      "baseTimeMs": 125.2
+    },
+    {
+      "mark": 17,
+      "service": "NetDDE",
+      "baseTimeMs": 60
+    },
+    {
+      "mark": 17,
+      "service": "NetDDEdsdm",
+      "baseTimeMs": 60
+    },
+    {
+      "mark": 17,
+      "service": "Netlogon",
+      "baseTimeMs": 60
+    },
+    {
+      "mark": 17,
+      "service": "Netman",
+      "baseTimeMs": 61.2
+    },
+    {
+      "mark": 17,
+      "service": "Nla",
+      "baseTimeMs": 23.6
+    },
+    {
+      "mark": 17,
+      "service": "NtLmSsp",
+      "baseTimeMs": 15
+    },
+    {
+      "mark": 17,
+      "service": "NtmsSvc",
+      "baseTimeMs": 600
+    },
+    {
+      "mark": 17,
+      "service": "PlugPlay",
+      "baseTimeMs": 60
+    },
+    {
+      "mark": 17,
+      "service": "PolicyAgent",
+      "baseTimeMs": 62.8
+    },
+    {
+      "mark": 17,
+      "service": "ProtectedStorage",
+      "baseTimeMs": 33.6
+    },
+    {
+      "mark": 17,
+      "service": "RasAuto",
+      "baseTimeMs": 524.2
+    },
+    {
+      "mark": 17,
+      "service": "RasMan",
+      "baseTimeMs": 60
+    },
+    {
+      "mark": 17,
+      "service": "RDSessMgr",
+      "baseTimeMs": 1277
+    },
+    {
+      "mark": 17,
+      "service": "RemoteAccess",
+      "baseTimeMs": 60
+    },
+    {
+      "mark": 17,
+      "service": "RemoteRegistry",
+      "baseTimeMs": 39.6
+    },
+    {
+      "mark": 17,
+      "service": "rpcapd",
+      "baseTimeMs": 196.6
+    },
+    {
+      "mark": 17,
+      "service": "RpcLocator",
+      "baseTimeMs": 154.6
+    },
+    {
+      "mark": 17,
+      "service": "RpcSs",
+      "baseTimeMs": 60
+    },
+    {
+      "mark": 17,
+      "service": "RSVP",
+      "baseTimeMs": 78.4
+    },
+    {
+      "mark": 17,
+      "service": "SCardSvr",
+      "baseTimeMs": 130.6
+    },
+    {
+      "mark": 17,
+      "service": "Schedule",
+      "baseTimeMs": 40.8
+    },
+    {
+      "mark": 17,
+      "service": "seclogon",
+      "baseTimeMs": 57
+    },
+    {
+      "mark": 17,
+      "service": "SENS",
+      "baseTimeMs": 30
+    },
+    {
+      "mark": 17,
+      "service": "SharedAccess",
+      "baseTimeMs": 80
+    },
+    {
+      "mark": 17,
+      "service": "ShellHWDetection",
+      "baseTimeMs": 17.6
+    },
+    {
+      "mark": 17,
+      "service": "Spooler",
+      "baseTimeMs": 160
+    },
+    {
+      "mark": 17,
+      "service": "srservice",
+      "baseTimeMs": 140
+    },
+    {
+      "mark": 17,
+      "service": "SSDPSRV",
+      "baseTimeMs": 170.4
+    },
+    {
+      "mark": 17,
+      "service": "stisvc",
+      "baseTimeMs": 608.2
+    },
+    {
+      "mark": 17,
+      "service": "SwPrv",
+      "baseTimeMs": 224.6
+    },
+    {
+      "mark": 17,
+      "service": "SysmonLog",
+      "baseTimeMs": 60
+    },
+    {
+      "mark": 17,
+      "service": "TapiSrv",
+      "baseTimeMs": 30.8
+    },
+    {
+      "mark": 17,
+      "service": "TermService",
+      "baseTimeMs": 60
+    },
+    {
+      "mark": 17,
+      "service": "Themes",
+      "baseTimeMs": 33.4
+    },
+    {
+      "mark": 17,
+      "service": "TlntSvr",
+      "baseTimeMs": 128.8
+    },
+    {
+      "mark": 17,
+      "service": "TrkWks",
+      "baseTimeMs": 126.4
+    },
+    {
+      "mark": 17,
+      "service": "upnphost",
+      "baseTimeMs": 75
+    },
+    {
+      "mark": 17,
+      "service": "UPS",
+      "baseTimeMs": 60
+    },
+    {
+      "mark": 17,
+      "service": "VSS",
+      "baseTimeMs": 128
+    },
+    {
+      "mark": 17,
+      "service": "W32Time",
+      "baseTimeMs": 37.2
+    },
+    {
+      "mark": 17,
+      "service": "WebClient",
+      "baseTimeMs": 234.2
+    },
+    {
+      "mark": 17,
+      "service": "winmgmt",
+      "baseTimeMs": 16
+    },
+    {
+      "mark": 17,
+      "service": "WmdmPmSN",
+      "baseTimeMs": 31.2
+    },
+    {
+      "mark": 17,
+      "service": "Wmi",
+      "baseTimeMs": 14.4
+    },
+    {
+      "mark": 17,
+      "service": "WmiApSrv",
+      "baseTimeMs": 146.2
+    },
+    {
+      "mark": 17,
+      "service": "wscsvc",
+      "baseTimeMs": 32.8
+    },
+    {
+      "mark": 17,
+      "service": "wuauserv",
+      "baseTimeMs": 70
+    },
+    {
+      "mark": 17,
+      "service": "WZCSVC",
+      "baseTimeMs": 72.8
+    },
+    {
+      "mark": 17,
+      "service": "xmlprov",
+      "baseTimeMs": 22
+    },
+    {
+      "mark": 18,
+      "service": "AeLookupSvc",
+      "baseTimeMs": 22.6
+    },
+    {
+      "mark": 18,
+      "service": "ALG",
+      "baseTimeMs": 75
+    },
+    {
+      "mark": 18,
+      "service": "AppIDSvc",
+      "baseTimeMs": 96.8
+    },
+    {
+      "mark": 18,
+      "service": "Appinfo",
+      "baseTimeMs": 25
+    },
+    {
+      "mark": 18,
+      "service": "AppMgmt",
+      "baseTimeMs": 21.8
+    },
+    {
+      "mark": 18,
+      "service": "AudioEndpointBuilder",
+      "baseTimeMs": 201
+    },
+    {
+      "mark": 18,
+      "service": "Audiosrv",
+      "baseTimeMs": 115.6
+    },
+    {
+      "mark": 18,
+      "service": "AxInstSV",
+      "baseTimeMs": 68.8
+    },
+    {
+      "mark": 18,
+      "service": "BDESVC",
+      "baseTimeMs": 15.4
+    },
+    {
+      "mark": 18,
+      "service": "BFE",
+      "baseTimeMs": 15.4
+    },
+    {
+      "mark": 18,
+      "service": "BITS",
+      "baseTimeMs": 27.6
+    },
+    {
+      "mark": 18,
+      "service": "Browser",
+      "baseTimeMs": 22.2
+    },
+    {
+      "mark": 18,
+      "service": "bthserv",
+      "baseTimeMs": 65.4
+    },
+    {
+      "mark": 18,
+      "service": "CertPropSvc",
+      "baseTimeMs": 19
+    },
+    {
+      "mark": 18,
+      "service": "clr_optimization_v2.0.50727_32",
+      "baseTimeMs": 88.4
+    },
+    {
+      "mark": 18,
+      "service": "COMSysApp",
+      "baseTimeMs": 124.6
+    },
+    {
+      "mark": 18,
+      "service": "CryptSvc",
+      "baseTimeMs": 30
+    },
+    {
+      "mark": 18,
+      "service": "CscService",
+      "baseTimeMs": 94.4
+    },
+    {
+      "mark": 18,
+      "service": "DcomLaunch",
+      "baseTimeMs": 15.4
+    },
+    {
+      "mark": 18,
+      "service": "defragsvc",
+      "baseTimeMs": 53.4
+    },
+    {
+      "mark": 18,
+      "service": "Dhcp",
+      "baseTimeMs": 90.8
+    },
+    {
+      "mark": 18,
+      "service": "Dnscache",
+      "baseTimeMs": 22
+    },
+    {
+      "mark": 18,
+      "service": "dot3svc",
+      "baseTimeMs": 59.2
+    },
+    {
+      "mark": 18,
+      "service": "DPS",
+      "baseTimeMs": 25
+    },
+    {
+      "mark": 18,
+      "service": "EapHost",
+      "baseTimeMs": 15.4
+    },
+    {
+      "mark": 18,
+      "service": "EFS",
+      "baseTimeMs": 103.6
+    },
+    {
+      "mark": 18,
+      "service": "eventlog",
+      "baseTimeMs": 15.4
+    },
+    {
+      "mark": 18,
+      "service": "EventSystem",
+      "baseTimeMs": 15.4
+    },
+    {
+      "mark": 18,
+      "service": "Fax",
+      "baseTimeMs": 466
+    },
+    {
+      "mark": 18,
+      "service": "fdPHost",
+      "baseTimeMs": 59
+    },
+    {
+      "mark": 18,
+      "service": "FDResPub",
+      "baseTimeMs": 141.2
+    },
+    {
+      "mark": 18,
+      "service": "FontCache",
+      "baseTimeMs": 343.2
+    },
+    {
+      "mark": 18,
+      "service": "FontCache3.0.0.0",
+      "baseTimeMs": 343.2
+    },
+    {
+      "mark": 18,
+      "service": "gpsvc",
+      "baseTimeMs": 15.4
+    },
+    {
+      "mark": 18,
+      "service": "hidserv",
+      "baseTimeMs": 15.8
+    },
+    {
+      "mark": 18,
+      "service": "hkmsvc",
+      "baseTimeMs": 21.8
+    },
+    {
+      "mark": 18,
+      "service": "HomeGroupListener",
+      "baseTimeMs": 21.8
+    },
+    {
+      "mark": 18,
+      "service": "HomeGroupProvider",
+      "baseTimeMs": 44
+    },
+    {
+      "mark": 18,
+      "service": "idsvc",
+      "baseTimeMs": 377
+    },
+    {
+      "mark": 18,
+      "service": "IKEEXT",
+      "baseTimeMs": 199.8
+    },
+    {
+      "mark": 18,
+      "service": "IPBusEnum",
+      "baseTimeMs": 387
+    },
+    {
+      "mark": 18,
+      "service": "iphlpsvc",
+      "baseTimeMs": 19
+    },
+    {
+      "mark": 18,
+      "service": "KeyIso",
+      "baseTimeMs": 15.4
+    },
+    {
+      "mark": 18,
+      "service": "KtmRm",
+      "baseTimeMs": 93.8
+    },
+    {
+      "mark": 18,
+      "service": "LanmanServer",
+      "baseTimeMs": 203.4
+    },
+    {
+      "mark": 18,
+      "service": "LanmanWorkstation",
+      "baseTimeMs": 15.4
+    },
+    {
+      "mark": 18,
+      "service": "lltdsvc",
+      "baseTimeMs": 25.4
+    },
+    {
+      "mark": 18,
+      "service": "lmhosts",
+      "baseTimeMs": 27.8
+    },
+    {
+      "mark": 18,
+      "service": "Mcx2Svc",
+      "baseTimeMs": 16
+    },
+    {
+      "mark": 18,
+      "service": "MMCSS",
+      "baseTimeMs": 15.4
+    },
+    {
+      "mark": 18,
+      "service": "MpsSvc",
+      "baseTimeMs": 56.2
+    },
+    {
+      "mark": 18,
+      "service": "MSDTC",
+      "baseTimeMs": 343.4
+    },
+    {
+      "mark": 18,
+      "service": "MSiSCSI",
+      "baseTimeMs": 421
+    },
+    {
+      "mark": 18,
+      "service": "msiserver",
+      "baseTimeMs": 287
+    },
+    {
+      "mark": 18,
+      "service": "napagent",
+      "baseTimeMs": 84.2
+    },
+    {
+      "mark": 18,
+      "service": "Netlogon",
+      "baseTimeMs": 55.8
+    },
+    {
+      "mark": 18,
+      "service": "Netman",
+      "baseTimeMs": 31.4
+    },
+    {
+      "mark": 18,
+      "service": "netprofm",
+      "baseTimeMs": 25.2
+    },
+    {
+      "mark": 18,
+      "service": "NetTcpPortSharing",
+      "baseTimeMs": 16
+    },
+    {
+      "mark": 18,
+      "service": "NlaSvc",
+      "baseTimeMs": 15.4
+    },
+    {
+      "mark": 18,
+      "service": "nsi",
+      "baseTimeMs": 15.4
+    },
+    {
+      "mark": 18,
+      "service": "ose",
+      "baseTimeMs": 53.4
+    },
+    {
+      "mark": 18,
+      "service": "p2pimsvc",
+      "baseTimeMs": 59.6
+    },
+    {
+      "mark": 18,
+      "service": "p2psvc",
+      "baseTimeMs": 268.2
+    },
+    {
+      "mark": 18,
+      "service": "PcaSvc",
+      "baseTimeMs": 103.2
+    },
+    {
+      "mark": 18,
+      "service": "PeerDistSvc",
+      "baseTimeMs": 127.8
+    },
+    {
+      "mark": 18,
+      "service": "pla",
+      "baseTimeMs": 71.6
+    },
+    {
+      "mark": 18,
+      "service": "PlugPlay",
+      "baseTimeMs": 91
+    },
+    {
+      "mark": 18,
+      "service": "PNRPAutoReg",
+      "baseTimeMs": 15.4
+    },
+    {
+      "mark": 18,
+      "service": "PNRPsvc",
+      "baseTimeMs": 13
+    },
+    {
+      "mark": 18,
+      "service": "PolicyAgent",
+      "baseTimeMs": 146.8
+    },
+    {
+      "mark": 18,
+      "service": "Power",
+      "baseTimeMs": 123
+    },
+    {
+      "mark": 18,
+      "service": "ProfSvc",
+      "baseTimeMs": 15.8
+    },
+    {
+      "mark": 18,
+      "service": "ProtectedStorage",
+      "baseTimeMs": 34.4
+    },
+    {
+      "mark": 18,
+      "service": "QWAVE",
+      "baseTimeMs": 96.8
+    },
+    {
+      "mark": 18,
+      "service": "RasAuto",
+      "baseTimeMs": 202.8
+    },
+    {
+      "mark": 18,
+      "service": "RasMan",
+      "baseTimeMs": 153.2
+    },
+    {
+      "mark": 18,
+      "service": "RemoteAccess",
+      "baseTimeMs": 15.8
+    },
+    {
+      "mark": 18,
+      "service": "RemoteRegistry",
+      "baseTimeMs": 25.2
+    },
+    {
+      "mark": 18,
+      "service": "RpcEptMapper",
+      "baseTimeMs": 45
+    },
+    {
+      "mark": 18,
+      "service": "RpcLocator",
+      "baseTimeMs": 65.2
+    },
+    {
+      "mark": 18,
+      "service": "RpcSs",
+      "baseTimeMs": 29
+    },
+    {
+      "mark": 18,
+      "service": "SamSs",
+      "baseTimeMs": 15.4
+    },
+    {
+      "mark": 18,
+      "service": "SCardSvr",
+      "baseTimeMs": 18.6
+    },
+    {
+      "mark": 18,
+      "service": "Schedule",
+      "baseTimeMs": 14
+    },
+    {
+      "mark": 18,
+      "service": "SCPolicySvc",
+      "baseTimeMs": 15.4
+    },
+    {
+      "mark": 18,
+      "service": "SDRSVC",
+      "baseTimeMs": 47.2
+    },
+    {
+      "mark": 18,
+      "service": "seclogon",
+      "baseTimeMs": 19
+    },
+    {
+      "mark": 18,
+      "service": "SENS",
+      "baseTimeMs": 15.8
+    },
+    {
+      "mark": 18,
+      "service": "SensrSvc",
+      "baseTimeMs": 19
+    },
+    {
+      "mark": 18,
+      "service": "SessionEnv",
+      "baseTimeMs": 37.6
+    },
+    {
+      "mark": 18,
+      "service": "SharedAccess",
+      "baseTimeMs": 45
+    },
+    {
+      "mark": 18,
+      "service": "ShellHWDetection",
+      "baseTimeMs": 16
+    },
+    {
+      "mark": 18,
+      "service": "SNMPTRAP",
+      "baseTimeMs": 106.2
+    },
+    {
+      "mark": 18,
+      "service": "Spooler",
+      "baseTimeMs": 726.8
+    },
+    {
+      "mark": 18,
+      "service": "sppsvc",
+      "baseTimeMs": 106.2
+    },
+    {
+      "mark": 18,
+      "service": "sppuinotify",
+      "baseTimeMs": 43.6
+    },
+    {
+      "mark": 18,
+      "service": "SSDPSRV",
+      "baseTimeMs": 109
+    },
+    {
+      "mark": 18,
+      "service": "SstpSvc",
+      "baseTimeMs": 15.4
+    },
+    {
+      "mark": 18,
+      "service": "StiSvc",
+      "baseTimeMs": 109.4
+    },
+    {
+      "mark": 18,
+      "service": "swprv",
+      "baseTimeMs": 68.8
+    },
+    {
+      "mark": 18,
+      "service": "SysMain",
+      "baseTimeMs": 37.6
+    },
+    {
+      "mark": 18,
+      "service": "TabletInputService",
+      "baseTimeMs": 21.4
+    },
+    {
+      "mark": 18,
+      "service": "TapiSrv",
+      "baseTimeMs": 13
+    },
+    {
+      "mark": 18,
+      "service": "TBS",
+      "baseTimeMs": 15.4
+    },
+    {
+      "mark": 18,
+      "service": "TermService",
+      "baseTimeMs": 178
+    },
+    {
+      "mark": 18,
+      "service": "Themes",
+      "baseTimeMs": 27.8
+    },
+    {
+      "mark": 18,
+      "service": "THREADORDER",
+      "baseTimeMs": 25.2
+    },
+    {
+      "mark": 18,
+      "service": "TrkWks",
+      "baseTimeMs": 15.8
+    },
+    {
+      "mark": 18,
+      "service": "TrustedInstaller",
+      "baseTimeMs": 524.4
+    },
+    {
+      "mark": 18,
+      "service": "UI0Detect",
+      "baseTimeMs": 227.8
+    },
+    {
+      "mark": 18,
+      "service": "UmRdpService",
+      "baseTimeMs": 174.8
+    },
+    {
+      "mark": 18,
+      "service": "upnphost",
+      "baseTimeMs": 21.8
+    },
+    {
+      "mark": 18,
+      "service": "UxSms",
+      "baseTimeMs": 62.6
+    },
+    {
+      "mark": 18,
+      "service": "VaultSvc",
+      "baseTimeMs": 243.6
+    },
+    {
+      "mark": 18,
+      "service": "vds",
+      "baseTimeMs": 230.8
+    },
+    {
+      "mark": 18,
+      "service": "VSS",
+      "baseTimeMs": 96.4
+    },
+    {
+      "mark": 18,
+      "service": "W32Time",
+      "baseTimeMs": 59.6
+    },
+    {
+      "mark": 18,
+      "service": "wbengine",
+      "baseTimeMs": 115.6
+    },
+    {
+      "mark": 18,
+      "service": "WbioSrvc",
+      "baseTimeMs": 353.2
+    },
+    {
+      "mark": 18,
+      "service": "wcncsvc",
+      "baseTimeMs": 75
+    },
+    {
+      "mark": 18,
+      "service": "WcsPlugInService",
+      "baseTimeMs": 56.2
+    },
+    {
+      "mark": 18,
+      "service": "WdiServiceHost",
+      "baseTimeMs": 61
+    },
+    {
+      "mark": 18,
+      "service": "WdiSystemHost",
+      "baseTimeMs": 15.4
+    },
+    {
+      "mark": 18,
+      "service": "WebClient",
+      "baseTimeMs": 121.6
+    },
+    {
+      "mark": 18,
+      "service": "Wecsvc",
+      "baseTimeMs": 53.2
+    },
+    {
+      "mark": 18,
+      "service": "wercplsupport",
+      "baseTimeMs": 25
+    },
+    {
+      "mark": 18,
+      "service": "WerSvc",
+      "baseTimeMs": 31.4
+    },
+    {
+      "mark": 18,
+      "service": "WinDefend",
+      "baseTimeMs": 99.4
+    },
+    {
+      "mark": 18,
+      "service": "WinHttpAutoProxySvc",
+      "baseTimeMs": 16
+    },
+    {
+      "mark": 18,
+      "service": "Winmgmt",
+      "baseTimeMs": 22.2
+    },
+    {
+      "mark": 18,
+      "service": "WinRM",
+      "baseTimeMs": 118.6
+    },
+    {
+      "mark": 18,
+      "service": "Wlansvc",
+      "baseTimeMs": 90.4
+    },
+    {
+      "mark": 18,
+      "service": "wmiApSrv",
+      "baseTimeMs": 78
+    },
+    {
+      "mark": 18,
+      "service": "WMPNetworkSvc",
+      "baseTimeMs": 112.4
+    },
+    {
+      "mark": 18,
+      "service": "WPCSvc",
+      "baseTimeMs": 15.6
+    },
+    {
+      "mark": 18,
+      "service": "WPDBusEnum",
+      "baseTimeMs": 18.6
+    },
+    {
+      "mark": 18,
+      "service": "wscsvc",
+      "baseTimeMs": 15.6
+    },
+    {
+      "mark": 18,
+      "service": "WSearch",
+      "baseTimeMs": 392.2
+    },
+    {
+      "mark": 18,
+      "service": "wuauserv",
+      "baseTimeMs": 162.4
+    },
+    {
+      "mark": 18,
+      "service": "wudfsvc",
+      "baseTimeMs": 78
+    },
+    {
+      "mark": 18,
+      "service": "WwanSvc",
+      "baseTimeMs": 71.6
+    }
+  ]
+}
