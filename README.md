@@ -1,8 +1,32 @@
 # 系统清理助手
 
-轻若分毫的 Windows 系统优化工具 —— 基于 **Tauri 2 + Rust** 构建，安装包仅 **1.74 MB**。
+<div align="center">
 
-> 垃圾清理 · 电脑加速 · 启动项管理 · 文件粉碎机
+**轻若分毫的 Windows 系统优化工具** —— 基于 Tauri 2 + Rust 构建，安装包仅 **1.74 MB**
+
+垃圾清理 · 电脑加速 · 启动项管理 · 文件粉碎机
+
+[![Latest Release](https://img.shields.io/github/v/release/GeLith/system-cleaner?style=flat-square&label=%E6%9C%80%E6%96%B0%E7%89%88)](https://github.com/GeLith/system-cleaner/releases/latest)
+[![Downloads](https://img.shields.io/github/downloads/GeLith/system-cleaner/total?style=flat-square&label=%E4%B8%8B%E8%BD%BD%E9%87%8F)](https://github.com/GeLith/system-cleaner/releases)
+![Platform](https://img.shields.io/badge/Windows-10%20%2F%2011-0071e3?style=flat-square)
+![Size](https://img.shields.io/badge/%E5%AE%89%E8%A3%85%E5%8C%85-1.74%20MB-16a34a?style=flat-square)
+
+<br>
+
+[![⬇️ 下载最新版](https://img.shields.io/badge/%E2%AC%87%EF%B8%8F_%E4%B8%8B%E8%BD%BD%E6%9C%80%E6%96%B0%E7%89%88-v1.0.0-0071e3?style=for-the-badge)](https://github.com/GeLith/system-cleaner/releases/latest)
+
+[直链下载安装包](https://github.com/GeLith/system-cleaner/releases/latest/download/system-cleaner_1.0.0_x64-setup.exe)
+
+</div>
+
+## 📥 下载
+
+| 项目 | 说明 |
+|---|---|
+| **下载页** | [Releases · 最新版](https://github.com/GeLith/system-cleaner/releases/latest) |
+| **安装包直链** | [system-cleaner_1.0.0_x64-setup.exe](https://github.com/GeLith/system-cleaner/releases/latest/download/system-cleaner_1.0.0_x64-setup.exe) |
+| **系统要求** | Windows 10（1803+）/ Windows 11 · 64 位 · 使用系统自带 WebView2，无需额外依赖 |
+| **安装方式** | 双击安装包，仅当前用户安装（无需管理员） |
 
 ## 特性
 
