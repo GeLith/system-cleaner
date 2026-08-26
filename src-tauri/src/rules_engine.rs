@@ -1,4 +1,4 @@
-﻿//! 规则引擎 —— 移植 rules/engine.js
+//! 规则引擎 —— 移植 rules/engine.js
 //! 加载 ui/rules/*.json + isSafePath/isCriticalRoot/expandTemplate
 //! 运行时通过 init(rules_dir) 注入规则目录(开发/打包均可工作)
 
@@ -137,6 +137,18 @@ const CRITICAL_ROOTS: &[&str] = &[
     "C:\\Users",
 ];
 
+/// 路径规范化: canonicalize(存在时)并剥离 Windows 扩展前缀 \\?\
+/// 解决 "存在的路径带 \\?\ 前缀、不存在的保持原样" 的不对称导致的比较失败
+fn norm_path(p: &PathBuf) -> String {
+    let canon = p.canonicalize().unwrap_or_else(|_| p.clone());
+    let mut s = canon.to_string_lossy().to_string();
+    if let Some(rest) = s.strip_prefix(r"\\?\UNC\") {
+        s = format!(r"\\{}", rest);
+    } else if let Some(rest) = s.strip_prefix(r"\\?\") {
+        s = rest.to_string();
+    }
+    s.trim_end_matches('\\').to_string()
+}
 /// 判断是否为关键根目录 —— 对齐 engine.js#74-83 isCriticalRoot()
 /// 手工实现盘符根目录检测: ^[a-z]:\\$
 fn is_drive_root(path: &str) -> bool {
@@ -166,12 +178,44 @@ pub fn is_critical_root(path: &str) -> bool {
 
 /// 判断 child 是否在 parent 内部 —— 对齐 engine.js#85-88 isInside()
 fn is_inside(parent: &str, child: &str) -> bool {
-    let parent = Path::new(parent);
-    let child = Path::new(child);
-    match child.strip_prefix(parent) {
+    // Windows 路径大小写不敏感; 统一小写后再比较
+    let parent = parent.to_lowercase();
+    let child = child.to_lowercase();
+    match Path::new(&child).strip_prefix(Path::new(&parent)) {
         Ok(rel) => !rel.as_os_str().is_empty() && !rel.components().any(|c| c.as_os_str() == ".."),
         Err(_) => false,
     }
+}
+
+/// 用户 shell 受保护目录 —— 用户的个人数据, 绝不允许被当作清理目标根目录
+/// (下载/桌面/文档/图片/音乐/视频/OneDrive, 含中文系统别名)
+pub fn protected_user_dirs() -> Vec<PathBuf> {
+    let up = PathBuf::from(std::env::var("USERPROFILE").unwrap_or_default());
+    vec![
+        up.join("Downloads"),
+        up.join("桌面"),
+        up.join("Desktop"),
+        up.join("Documents"),
+        up.join("文档"),
+        up.join("Pictures"),
+        up.join("图片"),
+        up.join("Music"),
+        up.join("音乐"),
+        up.join("Videos"),
+        up.join("视频"),
+        up.join("OneDrive"),
+    ]
+}
+
+/// 目标是否为受保护的用户目录根(精确匹配, 不影响其内部文件的正常清理流程)
+pub fn is_protected_user_dir(abs_path: &str) -> bool {
+    if abs_path.is_empty() {
+        return false;
+    }
+    let ts = norm_path(&PathBuf::from(abs_path));
+    protected_user_dirs()
+        .iter()
+        .any(|p| norm_path(p).eq_ignore_ascii_case(&ts))
 }
 
 /// 安全路径检查 —— 对齐 engine.js#97-113 isSafePath()
@@ -182,11 +226,8 @@ pub fn is_safe_path(abs_path: &str, allowed_root: &str) -> bool {
     if abs_path.is_empty() || allowed_root.is_empty() {
         return false;
     }
-    let target = Path::new(abs_path).canonicalize().unwrap_or_else(|_| PathBuf::from(abs_path));
-    let root = Path::new(allowed_root).canonicalize().unwrap_or_else(|_| PathBuf::from(allowed_root));
-
-    let target_str = target.to_string_lossy().to_string();
-    let root_str = root.to_string_lossy().to_string();
+    let target_str = norm_path(&PathBuf::from(abs_path));
+    let root_str = norm_path(&PathBuf::from(allowed_root));
 
     // target 必须在 root 内(或相等) —— 使用 is_inside 替代 pathdiff
     if target_str != root_str && !is_inside(&root_str, &target_str) {
@@ -195,6 +236,11 @@ pub fn is_safe_path(abs_path: &str, allowed_root: &str) -> bool {
 
     // target 不能是关键根
     if is_critical_root(&target_str) {
+        return false;
+    }
+
+    // target 不能是受保护的用户目录根 (下载/桌面/文档等)
+    if is_protected_user_dir(&target_str) {
         return false;
     }
 
@@ -250,8 +296,29 @@ mod tests {
         assert!(is_safe_path("C:\\Temp\\sub\\file.txt", "C:\\Temp"));
         // 越界
         assert!(!is_safe_path("C:\\Windows\\system32\\cmd.exe", "C:\\Temp"));
-        // 关键根本身
+        // 关键根目录
         assert!(!is_safe_path("C:\\Windows", "C:\\Windows"));
         assert!(!is_safe_path("C:\\Program Files", "C:\\Program Files"));
+    }
+
+    #[test]
+    fn test_protected_user_dirs() {
+        if let Ok(up) = std::env::var("USERPROFILE") {
+            let up = PathBuf::from(up);
+            // 不要求目录真实存在
+            assert!(is_protected_user_dir(&up.join("Downloads").to_string_lossy()));
+            assert!(is_protected_user_dir(&up.join("Desktop").to_string_lossy()));
+            assert!(is_protected_user_dir(&up.join("Documents").to_string_lossy()));
+            assert!(!is_protected_user_dir(&up.join("NotARealShellDir").to_string_lossy()));
+            // 受保护目录自身不允许作为清理目标
+            assert!(!is_safe_path(
+                &up.join("Downloads").to_string_lossy(),
+                &up.join("Downloads").to_string_lossy()
+            ));
+            // 其内部的普通文件不受影响 (允许被正常清理流程处理)
+            let inner = up.join("Downloads").join("some_file.txt");
+            assert!(is_protected_user_dir(&inner.to_string_lossy()) == false);
+        }
+        assert!(!is_protected_user_dir(""));
     }
 }

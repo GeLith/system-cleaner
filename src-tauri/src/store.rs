@@ -82,7 +82,8 @@ pub fn set(key: &str, value: Value) {
 
 /// 对齐 appendHistory: history 上限 30 条, totalCleanedMB 保留两位小数
 pub fn append_history(date: String, size_mb: f64) {
-    let st = STATE.get().expect("store not initialized");
+    // store 未初始化时静默跳过 (统计为尽力而为, 不应使清理流程 panic)
+    let Some(st) = STATE.get() else { return };
     let mut st = st.lock().unwrap();
     if !st.data["history"].is_array() {
         st.data["history"] = json!([]);

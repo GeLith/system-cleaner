@@ -574,6 +574,12 @@
         if (r && r.ok) {
           if (clFloatingBar) clFloatingBar.style.display = 'none';
           clGroups.innerHTML = '<p class="text-tertiary" style="text-align:center;padding:40px 0">清理完成</p>';
+          // 如实上报失败/跳过项, 不再静默
+          var fl = (r.failed || []).length;
+          var sk = r.skipped || 0;
+          if ((fl > 0 || sk > 0) && typeof showToast === 'function') {
+            showToast('清理完成：' + fl + ' 项失败，' + sk + ' 项跳过（占用或受保护）');
+          }
           refreshWelcomeStats();
         }
       }

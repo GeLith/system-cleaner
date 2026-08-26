@@ -1,4 +1,4 @@
-﻿//! 扫描编排器 —— 忠实移植 business/scanScheduler.js (570 行)
+//! 扫描编排器 —— 忠实移植 business/scanScheduler.js (570 行)
 //! - supersede: SCAN_KEY 单调递增, 旧扫描检查点自动失效
 //! - 状态全部走短临界区(std Mutex 不跨 .await), 保证 future Send
 use once_cell::sync::Lazy;
@@ -29,10 +29,30 @@ static RUNNING: AtomicBool = AtomicBool::new(false);
 /// 扫描结果登记: key = "{groupId}:{itemId}" -> 文件路径列表
 static RESULTS: Lazy<Mutex<HashMap<String, Vec<String>>>> =
     Lazy::new(|| Mutex::new(HashMap::new()));
-/// 加速项登记: fixId -> fix 对象(含 category)
+/// 修复项登记: fixId -> fix 参数(如 category)
 static FIX_MAP: Lazy<Mutex<HashMap<String, Value>>> = Lazy::new(|| Mutex::new(HashMap::new()));
 /// 分组定义缓存: groupId -> def
 static GROUP_DEFS: Lazy<Mutex<HashMap<String, Value>>> = Lazy::new(|| Mutex::new(HashMap::new()));
+
+/// 测试辅助: 手动登记扫描文件清单
+#[doc(hidden)]
+pub fn record_scan_files(group_id: &str, item_id: &str, files: Vec<String>) {
+    RESULTS
+        .lock()
+        .unwrap()
+        .insert(format!("{}:{}", group_id, item_id), files);
+}
+
+/// 测试辅助: 手动登记组定义
+#[doc(hidden)]
+pub fn record_group_def(def: Value) {
+    let gid = def
+        .get("groupId")
+        .and_then(|v| v.as_str())
+        .unwrap_or("")
+        .to_string();
+    GROUP_DEFS.lock().unwrap().insert(gid, def);
+}
 
 #[derive(Default)]
 struct BigFilesCache {
@@ -105,12 +125,9 @@ pub fn get_group_def(group_id: &str) -> Option<Value> {
 }
 
 /// 未命中返回 Null(命令层兜底为 [])
-pub fn get_scan_files(group_id: &str, item_id: &str) -> Value {
+pub fn get_scan_files(group_id: &str, item_id: &str) -> Option<Vec<String>> {
     let key = format!("{}:{}", group_id, item_id);
-    match RESULTS.lock().unwrap().get(&key) {
-        Some(v) => json!(v),
-        None => Value::Null,
-    }
+    RESULTS.lock().unwrap().get(&key).cloned()
 }
 
 /// speedup_optimize 需要整表(id->fix 含 category)构建 byCategory 聚合
@@ -562,11 +579,6 @@ fn path_str(p: PathBuf) -> String {
 
 /// 对齐 js#344-385 _buildGroupDefs: 按 tab 返回分组定义(目录用字符串存储)
 async fn build_group_defs(tab: &str) -> Vec<Value> {
-    let dl = paths::downloads().await.ok().flatten();
-    let dl_arr: Vec<Value> = match &dl {
-        Some(p) => vec![json!(path_str(p.clone()))],
-        None => vec![],
-    };
     let la = paths::local_app_data();
     let pd = paths::program_data();
     let sr = paths::system_root();
@@ -581,14 +593,12 @@ async fn build_group_defs(tab: &str) -> Vec<Value> {
         json!({"groupId":"crash_dumps","groupName":"崩溃转储","icon":"system","category":"trash","checked":true,"risky":false,"type":"dir_scan","action":"delete","dirs":[path_str(la.join("CrashDumps")), path_str(pd.join("Microsoft").join("Windows").join("WER"))],"minAgeDays":0,"maxDepth":4,"desc":"程序崩溃产生的转储文件"}),
         json!({"groupId":"error_reports","groupName":"错误报告","icon":"system","category":"trash","checked":true,"risky":false,"type":"dir_scan","action":"delete","dirs":[path_str(la.join("Microsoft").join("Windows").join("WER"))],"minAgeDays":0,"maxDepth":4,"desc":"Windows错误报告"}),
         json!({"groupId":"soft_dist","groupName":"系统更新缓存","icon":"system","category":"trash","checked":true,"risky":false,"type":"dir_scan","action":"delete","dirs":[path_str(sr.join("SoftwareDistribution").join("Download"))],"minAgeDays":0,"maxDepth":4,"desc":"Windows更新下载缓存"}),
-        json!({"groupId":"downloads_old","groupName":"过期安装包","icon":"download","category":"trash","checked":true,"risky":true,"type":"dir_scan","action":"delete","dirs":dl_arr.clone(),"minAgeDays":7,"maxDepth":3,"extFilter":"exe|msi|zip|rar|7z|iso|bat|cmd","desc":"下载目录中超过7天的安装包"}),
         json!({"groupId":"font_cache","groupName":"字体缓存","icon":"system","category":"trash","checked":true,"risky":false,"type":"dir_scan","action":"delete","dirs":[path_str(la.join("FontCache"))],"minAgeDays":0,"maxDepth":2,"desc":"字体缓存数据库"}),
         json!({"groupId":"inet_cache","groupName":"IE缓存","icon":"browser","category":"trash","checked":true,"risky":false,"type":"dir_scan","action":"delete","dirs":[path_str(la.join("Microsoft").join("Windows").join("INetCache"))],"minAgeDays":7,"maxDepth":6,"desc":"IE/Edge 传统缓存"}),
     ];
     let software_defs: Vec<Value> = vec![
         json!({"groupId":"soft_cache","groupName":"软件缓存","icon":"app","category":"software","checked":true,"risky":false,"type":"app_cache","action":"delete","desc":"已安装软件的缓存与临时文件"}),
-        json!({"groupId":"download_installers","groupName":"已下载的安装包","icon":"download","category":"software","checked":true,"risky":true,"type":"dir_scan","action":"delete","dirs":dl_arr.clone(),"minAgeDays":7,"maxDepth":3,"extFilter":"exe|msi|zip|rar|7z|iso","desc":"下载目录中超过7天的安装包"}),
-        json!({"groupId":"big_files","groupName":"无用大文件","icon":"file","category":"software","checked":false,"risky":true,"type":"big_files","action":"delete","desc":"超过100MB的大文件"}),
+        json!({"groupId":"big_files","groupName":"大文件(仅列出)","icon":"file","category":"software","checked":false,"risky":true,"type":"big_files","action":"none","listOnly":true,"desc":"扫描下载/桌面/文档中超过100MB的文件, 仅供查看, 不会自动删除"}),
     ];
     let plugin_defs: Vec<Value> = vec![
         json!({"groupId":"browser_ext","groupName":"浏览器扩展残留","icon":"plugin","category":"plugin","checked":true,"risky":false,"type":"extensions","action":"delete","desc":"Chrome/Edge 扩展目录中的残留"}),

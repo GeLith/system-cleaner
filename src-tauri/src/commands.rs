@@ -92,10 +92,10 @@ pub async fn clean_execute(app: AppHandle, items: Vec<Value>) -> Value {
 
 #[tauri::command]
 pub fn clean_item_files(group_id: String, item_id: String) -> Value {
-    // 对齐 ipc.js#99-100: 未命中返回 []
+    // 对齐 ipc.js#99-100: 未扫描返回 []
     match crate::business::scan_scheduler::get_scan_files(&group_id, &item_id) {
-        Value::Null => serde_json::json!([]),
-        v => v,
+        Some(v) => serde_json::json!(v),
+        None => serde_json::json!([]),
     }
 }
 

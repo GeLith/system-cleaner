@@ -1,4 +1,4 @@
-﻿//! 服务管理 —— 对齐 Electron 版 system/service.js
+//! 服务管理 —— 对齐 Electron 版 system/service.js
 //! 通过 sc.exe 子进程实现, 复用 exec::run_async
 
 use crate::system::exec::{run_async, decode};
@@ -181,8 +181,15 @@ fn extract_field(output: &str, field: &str) -> Option<String> {
     let prefix = format!("{}:", field);
     for line in output.lines() {
         let trimmed = line.trim();
-        if trimmed.starts_with(&prefix) {
-            return Some(trimmed[prefix.len()..].trim().to_string());
+        // 快路径: 字段名紧跟冒号
+        if let Some(rest) = trimmed.strip_prefix(prefix.as_str()) {
+            return Some(rest.trim().to_string());
+        }
+        // sc query 输出的字段名与冒号之间有对齐空格: "STATE        : 4  RUNNING"
+        if trimmed.starts_with(field) {
+            if let Some(pos) = trimmed.find(':') {
+                return Some(trimmed[pos + 1..].trim().to_string());
+            }
         }
     }
     None
