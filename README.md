@@ -13,9 +13,9 @@
 
 <br>
 
-[![⬇️ 下载最新版](https://img.shields.io/badge/%E2%AC%87%EF%B8%8F_%E4%B8%8B%E8%BD%BD%E6%9C%80%E6%96%B0%E7%89%88-v1.0.0-0071e3?style=for-the-badge)](https://github.com/GeLith/system-cleaner/releases/latest)
+[![⬇️ 下载最新版](https://img.shields.io/badge/%E2%AC%87%EF%B8%8F_%E4%B8%8B%E8%BD%BD%E6%9C%80%E6%96%B0%E7%89%88-v1.0.1-0071e3?style=for-the-badge)](https://github.com/GeLith/system-cleaner/releases/latest)
 
-[直链下载安装包](https://github.com/GeLith/system-cleaner/releases/latest/download/system-cleaner_1.0.0_x64-setup.exe)
+[直链下载安装包](https://github.com/GeLith/system-cleaner/releases/latest/download/system-cleaner_1.0.1_x64-setup.exe)
 
 </div>
 
@@ -24,9 +24,11 @@
 | 项目 | 说明 |
 |---|---|
 | **下载页** | [Releases · 最新版](https://github.com/GeLith/system-cleaner/releases/latest) |
-| **安装包直链** | [system-cleaner_1.0.0_x64-setup.exe](https://github.com/GeLith/system-cleaner/releases/latest/download/system-cleaner_1.0.0_x64-setup.exe) |
+| **安装包直链** | [system-cleaner_1.0.1_x64-setup.exe](https://github.com/GeLith/system-cleaner/releases/latest/download/system-cleaner_1.0.1_x64-setup.exe) |
 | **系统要求** | Windows 10（1803+）/ Windows 11 · 64 位 · 使用系统自带 WebView2，无需额外依赖 |
 | **安装方式** | 双击安装包，仅当前用户安装（无需管理员） |
+
+> **⚠️ v1.0.1 关键修复**：本版本修复了清理功能误删用户下载文件夹及“假清理”问题。若你正在使用 v1.0.0，请尽快更新到 v1.0.1。
 
 ## 特性
 
